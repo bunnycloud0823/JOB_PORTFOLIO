@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>포트폴리오 - 데이터 분석가</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f7f7f7;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 1.5rem 4rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 네비게이션 로드 영역 -->
+  <div id="nav-placeholder"></div>
+
+  <!-- 본문 영역 -->
+  <main id="main-content"></main>
+
+  <script>
+    // navigation.html 불러오기
+    fetch("navigation.html")
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById("nav-placeholder").innerHTML = html;
+        attachNavHandlers();
+      });
+
+    // 기본 페이지 로드 (WHO AM I)
+    window.addEventListener("DOMContentLoaded", () => {
+      loadPage("whoami.html");
+    });
+
+    // 페이지 로드 함수
+    function loadPage(page, sectionId = null) {
+      fetch(page)
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById("main-content").innerHTML = html;
+          window.scrollTo(0, 0);
+
+          // 특정 섹션(projects.html 내부 등)으로 이동
+          if (sectionId) {
+            setTimeout(() => {
+              const el = document.getElementById(sectionId);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+            }, 200);
+          }
+        });
+    }
+
+    // 네비게이션 클릭 이벤트 연결
+    function attachNavHandlers() {
+      document.querySelectorAll("[data-page]").forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const page = link.getAttribute("data-page");
+          const section = link.getAttribute("data-target");
+          loadPage(page, section);
+        });
+      });
+    }
+  </script>
+</body>
+</html>
