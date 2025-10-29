@@ -1,222 +1,299 @@
-<section id="projects" class="page-content pt-0 pb-12 sm:pb-24">
-  <div class="space-y-16">
-    <!-- 프로젝트 1 -->
-    <article id="project1" class="pt-6">
-      <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">
-        아동의 행복을 위한 정책제안
-      </h3>
-      <p class="text-sm text-gray-500 mb-6 border-b pb-2">
-        사회적 관심 데이터 분석 및 정책 영향 요인 탐색 (Python, 머신러닝)
-      </p>
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>포트폴리오 - 데이터 분석가</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <style>
+            /* 기본 폰트 설정 */
+            :root { scroll-behavior: smooth; }
+            body {
+                font-family: 'Inter', sans-serif;
+                background-color: #f7f7f7; /* 아주 연한 회색 배경 */
+            }
+            /* 섹션 구분선 */
+            .section-divider {
+                height: 1px;
+                background-color: #e5e5e5;
+                margin: 4rem 0;
+            }
+    
+            /* 프로젝트 드롭다운 (PC: hover) */
+            .project-menu-container { position: relative; }
+            .project-dropdown {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                transform: translateX(-50%);
+                min-width: 15rem;
+                z-index: 20;
+                background-color: white;
+                border: 1px solid #e5e5e5;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            @media (min-width: 768px) {
+                .project-menu-container:hover .project-dropdown { display: block; }
+            }
+            .project-dropdown a {
+                padding: 0.75rem 1rem;
+                display: block;
+                font-weight: 500;
+            }
+            .project-dropdown a:hover { background-color: #f0f0f0; }
+            
+            /* 활성 네비게이션 링크 스타일 (하늘색 밑줄) */
+            .nav-link.active {
+                border-bottom: 3px solid #3b82f6; /* blue-500 */
+                padding-bottom: 0.25rem;
+                font-weight: 700;
+            }
+            
+            /* 텍스트 가독성 및 레이아웃 */
+            .text-content-wrapper { line-height: 1.8; letter-spacing: -0.01em; word-break: keep-all; }
+            .gray-box { background-color: #ffffff; border: 1px solid #e5e5e5; }
+        </style>
+    </head>
+    <body class="text-gray-900">
+    
+        <header class="sticky top-0 z-10 bg-white shadow-md border-b border-gray-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-center items-center">
+                <nav class="hidden md:flex space-x-10 text-sm font-medium">
+                    <a href="whoami.html" data-target="whoami" class="nav-link hover:text-black transition duration-150">WHO AM I</a>
+                    <a href="selfintro.html" data-target="coverletter" class="nav-link hover:text-black transition duration-150">자소서</a>
+                    <div class="project-menu-container group">
+                        <a href="projects.html" data-target="projects" class="nav-link cursor-pointer hover:text-black transition duration-150">프로젝트 ▼</a>
+                        <div class="project-dropdown hidden md:group-hover:block transition duration-200 ease-in-out">
+                            <a href="projects.html#project1" data-target="project1" data-main-target="projects" class="project-link text-sm">프로젝트 1: 아동 행복</a>
+                            <a href="projects.html#project2" data-target="project2" data-main-target="projects" class="project-link text-sm">프로젝트 2: 노인 고독사</a>
+                            <a href="projects.html#project3" data-target="project3" data-main-target="projects" class="project-link text-sm">프로젝트 3: 공공 보건 캠페인</a>
+                            <a href="projects.html#project4" data-target="project4" data-main-target="projects" class="project-link text-sm">프로젝트 4: 도시 환경 만족도</a>
+                        </div>
+                    </div>
+                </nav>
+                <button id="mobile-menu-button" class="md:hidden absolute right-4 p-2 rounded-md hover:bg-gray-100">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                </button>
+            </div>
+            <nav id="mobile-menu-items" class="md:hidden bg-white border-t border-gray-200" style="display: none;">
+                <a href="whoami.html" data-target="whoami" class="nav-link block px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50">WHO AM I</a>
+                <a href="selfintro.html" data-target="coverletter" class="nav-link block px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50">자소서</a>
+                <div id="mobile-project-toggle" class="px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex justify-between items-center">
+                    <span>프로젝트</span>
+                    <span id="mobile-project-arrow" class="text-xs">▼</span>
+                </div>
+                <div id="mobile-project-dropdown" class="hidden bg-gray-50">
+                    <a href="projects.html#project1" data-target="project1" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 1: 아동 행복</a>
+                    <a href="projects.html#project2" data-target="project2" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 2: 노인 고독사</a>
+                    <a href="projects.html#project3" data-target="project3" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 3: 공공 보건 캠페인</a>
+                    <a href="projects.html#project4" data-target="project4" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 4: 도시 환경 만족도</a>
+                </div>
+            </nav>
+        </header>
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20" id="main-content">
+            <section id="projects" class="pt-0 pb-12 sm:pb-24">
 
-      <div class="space-y-6 text-content-wrapper">
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
-          <p class="text-gray-700">
-            부모의 정신적 안정과 아동의 정서 발달 간의 상관관계를 탐색하여 실효성 있는 아동 복지 정책을 제안하는 것이 목표였습니다.
-            초기 가설은 '가족 간의 지지도가 아동의 행복에 가장 큰 영향을 미칠 것'이라고 설정했으나, 실제 데이터 분석을 통해
-            '아동이 가족을 생각하는 정도'가 핵심 변수임을 확인했습니다.
-          </p>
-        </div>
+                <div class="space-y-16">
+                    <article id="project1" class="pt-6">
+                        <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">프로젝트 1: 아동의 행복을 위한 정책제안</h3>
+                        <p class="text-sm text-gray-500 mb-6 border-b pb-2">사회적 관심 데이터 분석 및 정책 영향 요인 탐색 (Python, 머신러닝)</p>
+                        <div class="space-y-6 text-content-wrapper">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
+                                <p class="text-gray-700">부모의 정신적 안정과 아동의 정서 발달 간의 상관관계를 탐색하여 실효성 있는 아동 복지 정책을 제안하는 것이 목표였습니다. 초기 가설은 '가족 간의 지지도가 아동의 행복에 가장 큰 영향을 미칠 것'이라고 설정했으나, 실제 데이터 분석을 통해 '아동이 가족을 생각하는 정도'가 핵심 변수임을 확인했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
+                                <p class="text-gray-700">한국청소년정책연구원의 '아동종합실태조사' 데이터를 활용했습니다. (약 7,000가구, 150여 개 변수). 주요 변수로는 가족 지지도, 부모의 정신 건강 점수, 아동의 행복 지수, 학업 만족도 등을 사용했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
+                                    <li>**전처리:** 결측치 처리, 비연속 변수 범주화, 파생 변수('가족 생각' 지수) 생성.</li>
+                                    <li>**탐색적 분석 (EDA):** Matplotlib을 이용한 변수 간 상관관계 및 분포 시각화.</li>
+                                    <li>**모델링:** 랜덤 포레스트(Random Forest) 회귀 모델을 사용하여 아동 행복 지수에 영향을 미치는 주요 변수(Feature Importance) 도출.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
+                                <p class="text-gray-700">분석 결과, 아동 행복에 가장 큰 영향을 미치는 요인은 '가족 간의 지지 행동'보다 '아동 스스로가 가족을 긍정적으로 생각하는 정도'로 나타났습니다. 이에 따라 정책 제안 방향을 '부모 대상 교육'에서 '아동의 자존감 및 가족 관계 인식 개선을 위한 프로그램'으로 전환할 것을 제안했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
+                                <p class="text-gray-700">분석 결과의 신뢰도를 높이기 위해 시계열 데이터(Longitudinal data)를 확보하여 정책 시행 전후의 아동 행복 지수 변화를 추적하는 연구를 추가로 진행할 필요가 있습니다. 또한, 지역별(도시 vs 농촌) 특성을 고려한 맞춤형 정책 제안 모델을 구축할 계획입니다.</p>
+                            </div>
+                        </div>
+                    </article>
 
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
-          <p class="text-gray-700">
-            한국청소년정책연구원의 '아동종합실태조사' 데이터를 활용했습니다. (약 7,000가구, 150여 개 변수)
-            주요 변수로는 가족 지지도, 부모의 정신 건강 점수, 아동의 행복 지수, 학업 만족도 등을 사용했습니다.
-          </p>
-        </div>
+                    <div class="section-divider"></div>
 
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
-          <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
-            <li>전처리: 결측치 처리, 비연속 변수 범주화, 파생 변수('가족 생각' 지수) 생성.</li>
-            <li>탐색적 분석 (EDA): Matplotlib을 이용한 변수 간 상관관계 및 분포 시각화.</li>
-            <li>모델링: 랜덤 포레스트(Random Forest) 회귀 모델을 사용하여 아동 행복 지수에 영향을 미치는 주요 변수(Feature Importance) 도출.</li>
-          </ul>
-        </div>
+                    <article id="project2" class="pt-6">
+                        <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">프로젝트 2: 노인 고독사 예방을 위한 지역사회 자원 배분 최적화 분석</h3>
+                        <p class="text-sm text-gray-500 mb-6 border-b pb-2">고독사 위험 예측 및 사회 복지 자원 집중 지역 도출 (Python, 통계 분석)</p>
+                        <div class="space-y-6 text-content-wrapper">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
+                                <p class="text-gray-700">고령화 사회에서 노인 고독사가 심각한 문제로 대두되고 있으나, 복지 자원은 효율적으로 배분되지 못하고 있습니다. 이에 고독사 위험이 높은 지역과 대상자를 사전에 예측하여 제한된 지역사회 복지 자원을 최적화하여 투입할 필요성을 느꼈습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
+                                <p class="text-gray-700">통계청 인구총조사 데이터(1인 가구 비율, 연령대), 보건복지부의 지역사회 자원 현황(노인복지관, 의료시설 접근성), 경찰청의 고독사 발생 현황(가상의 모의 데이터)을 결합하여 사용했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
+                                    <li>**전처리:** 행정동 단위로 데이터 통합(Aggregation), 지리정보 데이터(GIS)를 활용한 변수(예: 주변 복지시설까지의 거리) 생성.</li>
+                                    <li>**모델링:** 로지스틱 회귀 모델(Logistic Regression)을 사용하여 고독사 발생 확률을 예측하고, SHAP value를 이용해 예측에 기여한 요인(Factor)을 해석했습니다.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
+                                <p class="text-gray-700">분석 결과, 단순히 고령 인구가 많은 지역보다 '저소득 1인 가구 비율'과 '의료시설 접근성 취약성'이 결합된 지역에서 고독사 위험도가 3배 이상 높게 나타났습니다. 이에 따라, 기존의 방문 돌봄 서비스를 위험도가 높은 특정 동(洞)에 집중 배치하는 '위험 가중치 기반 자원 배분 모델'을 제안했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
+                                <p class="text-gray-700">복지 인력의 업무 부담을 줄이기 위해, 예측 모델의 결과를 시각화 대시보드(Tableau)로 구축하여 담당 공무원이 위험 지역을 실시간으로 확인하고 관리할 수 있도록 시스템을 확장하는 방안을 고려하고 있습니다.</p>
+                            </div>
+                        </div>
+                    </article>
 
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
-          <p class="text-gray-700">
-            분석 결과, 아동 행복에 가장 큰 영향을 미치는 요인은 '가족 간의 지지 행동'보다
-            '아동 스스로가 가족을 긍정적으로 생각하는 정도'로 나타났습니다.
-            이에 따라 정책 제안 방향을 '부모 대상 교육'에서 '아동의 자존감 및 가족 관계 인식 개선을 위한 프로그램'으로 전환할 것을 제안했습니다.
-          </p>
-        </div>
+                    <div class="section-divider"></div>
 
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
-          <p class="text-gray-700">
-            분석 결과의 신뢰도를 높이기 위해 시계열 데이터(Longitudinal data)를 확보하여 정책 시행 전후의 아동 행복 지수 변화를 추적하는 연구를 추가로 진행할 필요가 있습니다.
-            또한, 지역별(도시 vs 농촌) 특성을 고려한 맞춤형 정책 제안 모델을 구축할 계획입니다.
-          </p>
-        </div>
-      </div>
-    </article>
+                    <article id="project3" class="pt-6">
+                        <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">프로젝트 3: 소셜 미디어를 활용한 공공 보건 캠페인의 확산 효과 측정</h3>
+                        <p class="text-sm text-gray-500 mb-6 border-b pb-2">캠페인 관련 여론 분석 및 미디어 채널별 효과 검증 (Python, 자연어 처리(NLP), Tableau)</p>
+                        <div class="space-y-6 text-content-wrapper">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
+                                <p class="text-gray-700">공공 보건 캠페인(예: 금연, 정신 건강 증진)에 막대한 예산이 투입되지만, 실제 대중의 인식 변화 및 확산 효과에 대한 정량적 측정이 부족했습니다. 소셜 미디어 데이터를 분석하여 캠페인 메시지의 도달률과 대중의 정서적 반응을 측정하고자 했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
+                                <p class="text-gray-700">캠페인 기간 전후 3개월 동안의 주요 소셜 미디어 플랫폼(X, 블로그, 커뮤니티 등)에서 수집한 키워드 언급 데이터(약 5만 건의 텍스트 데이터)를 사용했습니다. 캠페인 광고비 및 노출 빈도 데이터도 부수적으로 활용했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
+                                    <li>**텍스트 전처리:** KoNLPy를 활용한 한국어 형태소 분석 및 불용어 제거.</li>
+                                    <li>**정서 분석 (Sentiment Analysis):** 긍정/부정/중립 키워드 사전 구축 후 감성 분류 수행.</li>
+                                    <li>**네트워크 분석:** 핵심 참여자 및 메시지 확산 경로를 파악하기 위한 워드 클라우드 및 연관어 분석.</li>
+                                    <li>**시각화:** Tableau 대시보드를 통해 일별 언급량, 감성 추이, 채널별 확산 기여도를 비교 분석.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
+                                <p class="text-gray-700">분석 결과, TV 광고 중심의 캠페인은 초기 인지도는 높았으나, 젊은 층의 '정서적 공감'을 얻는 데는 유튜브나 커뮤니티의 '간접 참여형 콘텐츠'가 더 효과적임을 확인했습니다. 이에 따라 다음 캠페인부터는 예산의 40%를 젊은 층이 주로 이용하는 채널의 챌린지 형태 콘텐츠 제작에 재배분할 것을 제안했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
+                                <p class="text-gray-700">캠페인 메시지의 '톤 앤 매너'가 정서 분류에 미치는 영향을 심층적으로 분석하기 위해 딥러닝 기반의 BERT 모델을 활용한 정교한 감성 분석을 시도하여, 더 미묘한 여론 변화를 포착하는 연구를 진행할 계획입니다.</p>
+                            </div>
+                        </div>
+                    </article>
 
-    <div class="section-divider"></div>
+                    <div class="section-divider"></div>
 
-    <!-- 프로젝트 2 -->
-    <article id="project2" class="pt-6">
-      <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">
-        프로젝트 2: 노인 고독사 예방을 위한 지역사회 자원 배분 최적화 분석
-      </h3>
-      <p class="text-sm text-gray-500 mb-6 border-b pb-2">
-        고독사 위험 예측 및 사회 복지 자원 집중 지역 도출 (Python, 통계 분석)
-      </p>
+                    <article id="project4" class="pt-6">
+                        <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">프로젝트 4: 대중교통 이용 패턴 기반 도시 환경 만족도 예측 모델 개발</h3>
+                        <p class="text-sm text-gray-500 mb-6 border-b pb-2">대중교통 이용 데이터와 환경 데이터를 결합한 도시 만족도 지수 산출 (Python, 시계열 분석)</p>
+                        <div class="space-y-6 text-content-wrapper">
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
+                                <p class="text-gray-700">도시민의 삶의 질을 높이기 위한 정책 수립 시, 직접적인 설문 외에 '도시를 이용하는 방식'에서 만족도를 간접적으로 파악할 필요가 있습니다. 대중교통 이용 패턴과 미세먼지, 공원 접근성 등의 환경 요인이 도시 생활 만족도에 미치는 영향을 모델링하고자 했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
+                                <p class="text-gray-700">교통카드 데이터(시간대별/지역별 승하차 인원, 환승 패턴), 공공 데이터 포털의 미세먼지/초미세먼지 지수, 서울시 공원 및 녹지 공간 정보(GIS)를 활용했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
+                                <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
+                                    <li>**시계열 통합:** 시계열 데이터(교통량, 미세먼지)를 일 단위/지역 단위로 통합 및 정규화.</li>
+                                    <li>**패턴 분석:** 출퇴근 시간대의 특정 교통수단(버스 vs 지하철) 이용 변화와 미세먼지 수준 간의 상관관계 분석.</li>
+                                    <li>**모델링:** ARIMA 모델과 선형 회귀 모델을 결합하여, 환경 변화에 따른 도시 만족도 지수의 예측 변화량을 산출했습니다.</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
+                                <p class="text-gray-700">미세먼지가 '나쁨' 이상인 날, 버스 이용량이 지하철 이용량보다 상대적으로 크게 감소하는 패턴을 발견했습니다. 이는 지하철역 접근성이 낮은 지역 주민의 도시 생활 불편도가 높음을 시사합니다. 따라서 미세먼지 대응 시 지하철역 중심의 대책보다는, 버스 노선 주변의 대기질 개선(미세먼지 저감 시설 설치)에 집중할 것을 제안했습니다.</p>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
+                                <p class="text-gray-700">교통 혼잡도 데이터와 환경 만족도 예측 모델을 결합하여, '교통 체증 완화 정책'이 도시 환경 만족도에 미치는 파급 효과를 시뮬레이션하는 동적 예측 모델로 발전시키고자 합니다.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </main>
 
-      <div class="space-y-6 text-content-wrapper">
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
-          <p class="text-gray-700">
-            고령화 사회에서 노인 고독사가 심각한 문제로 대두되고 있으나, 복지 자원은 효율적으로 배분되지 못하고 있습니다.
-            이에 고독사 위험이 높은 지역과 대상자를 사전에 예측하여 제한된 지역사회 복지 자원을 최적화하여 투입할 필요성을 느꼈습니다.
-          </p>
-        </div>
+        <footer class="bg-gray-900 text-white py-8 mt-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Data Analyst Portfolio. All rights reserved.</p>
+                <p class="mt-2">Designed with Black & White Simplicity and Full Responsiveness.</p>
+            </div>
+        </footer>
 
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
-          <p class="text-gray-700">
-            통계청 인구총조사 데이터(1인 가구 비율, 연령대), 보건복지부의 지역사회 자원 현황(노인복지관, 의료시설 접근성),
-            경찰청의 고독사 발생 현황(가상의 모의 데이터)을 결합하여 사용했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
-          <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
-            <li>전처리: 행정동 단위로 데이터 통합(Aggregation), 지리정보 데이터(GIS)를 활용한 변수(예: 주변 복지시설까지의 거리) 생성.</li>
-            <li>모델링: 로지스틱 회귀 모델(Logistic Regression)을 사용하여 고독사 발생 확률을 예측하고, SHAP value를 이용해 예측에 기여한 요인(Factor)을 해석했습니다.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
-          <p class="text-gray-700">
-            분석 결과, 단순히 고령 인구가 많은 지역보다 '저소득 1인 가구 비율'과 '의료시설 접근성 취약성'이 결합된 지역에서 고독사 위험도가 3배 이상 높게 나타났습니다.
-            이에 따라, 기존의 방문 돌봄 서비스를 위험도가 높은 특정 동(洞)에 집중 배치하는 '위험 가중치 기반 자원 배분 모델'을 제안했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
-          <p class="text-gray-700">
-            복지 인력의 업무 부담을 줄이기 위해, 예측 모델의 결과를 시각화 대시보드(Tableau)로 구축하여 담당 공무원이 위험 지역을 실시간으로 확인하고 관리할 수 있도록 시스템을 확장하는 방안을 고려하고 있습니다.
-          </p>
-        </div>
-      </div>
-    </article>
-
-    <div class="section-divider"></div>
-
-    <!-- 프로젝트 3 -->
-    <article id="project3" class="pt-6">
-      <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">
-        프로젝트 3: 소셜 미디어를 활용한 공공 보건 캠페인의 확산 효과 측정
-      </h3>
-      <p class="text-sm text-gray-500 mb-6 border-b pb-2">
-        캠페인 관련 여론 분석 및 미디어 채널별 효과 검증 (Python, 자연어 처리(NLP), Tableau)
-      </p>
-
-      <div class="space-y-6 text-content-wrapper">
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
-          <p class="text-gray-700">
-            공공 보건 캠페인(예: 금연, 정신 건강 증진)에 막대한 예산이 투입되지만, 실제 대중의 인식 변화 및 확산 효과에 대한 정량적 측정이 부족했습니다.
-            소셜 미디어 데이터를 분석하여 캠페인 메시지의 도달률과 대중의 정서적 반응을 측정하고자 했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
-          <p class="text-gray-700">
-            캠페인 기간 전후 3개월 동안의 주요 소셜 미디어 플랫폼(X, 블로그, 커뮤니티 등)에서 수집한 키워드 언급 데이터(약 5만 건의 텍스트 데이터)를 사용했습니다.
-            캠페인 광고비 및 노출 빈도 데이터도 부수적으로 활용했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
-          <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
-            <li>텍스트 전처리: KoNLPy를 활용한 한국어 형태소 분석 및 불용어 제거.</li>
-            <li>정서 분석 (Sentiment Analysis): 긍정/부정/중립 키워드 사전 구축 후 감성 분류 수행.</li>
-            <li>네트워크 분석: 핵심 참여자 및 메시지 확산 경로를 파악하기 위한 워드 클라우드 및 연관어 분석.</li>
-            <li>시각화: Tableau 대시보드를 통해 일별 언급량, 감성 추이, 채널별 확산 기여도를 비교 분석.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
-          <p class="text-gray-700">
-            분석 결과, TV 광고 중심의 캠페인은 초기 인지도는 높았으나, 젊은 층의 '정서적 공감'을 얻는 데는 유튜브나 커뮤니티의 '간접 참여형 콘텐츠'가 더 효과적임을 확인했습니다.
-            이에 따라 다음 캠페인부터는 예산의 40%를 젊은 층이 주로 이용하는 채널의 챌린지 형태 콘텐츠 제작에 재배분할 것을 제안했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
-          <p class="text-gray-700">
-            캠페인 메시지의 '톤 앤 매너'가 정서 분류에 미치는 영향을 심층적으로 분석하기 위해
-            딥러닝 기반의 BERT 모델을 활용한 정교한 감성 분석을 시도하여, 더 미묘한 여론 변화를 포착하는 연구를 진행할 계획입니다.
-          </p>
-        </div>
-      </div>
-    </article>
-
-    <div class="section-divider"></div>
-
-    <!-- 프로젝트 4 -->
-    <article id="project4" class="pt-6">
-      <h3 class="project-title text-3xl font-bold mb-4 text-gray-900">
-        프로젝트 4: 대중교통 이용 패턴 기반 도시 환경 만족도 예측 모델 개발
-      </h3>
-      <p class="text-sm text-gray-500 mb-6 border-b pb-2">
-        대중교통 이용 데이터와 환경 데이터를 결합한 도시 만족도 지수 산출 (Python, 시계열 분석)
-      </p>
-
-      <div class="space-y-6 text-content-wrapper">
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">1. 배경 및 가설</h4>
-          <p class="text-gray-700">
-            도시민의 삶의 질을 높이기 위한 정책 수립 시, 직접적인 설문 외에 '도시를 이용하는 방식'에서 만족도를 간접적으로 파악할 필요가 있습니다.
-            대중교통 이용 패턴과 미세먼지, 공원 접근성 등의 환경 요인이 도시 생활 만족도에 미치는 영향을 모델링하고자 했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">2. 분석 데이터</h4>
-          <p class="text-gray-700">
-            교통카드 데이터(시간대별/지역별 승하차 인원, 환승 패턴), 공공 데이터 포털의 미세먼지/초미세먼지 지수, 서울시 공원 및 녹지 공간 정보(GIS)를 활용했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">3. 데이터 분석 과정</h4>
-          <ul class="list-disc list-inside ml-4 text-gray-700 space-y-1">
-            <li>시계열 통합: 시계열 데이터(교통량, 미세먼지)를 일 단위/지역 단위로 통합 및 정규화.</li>
-            <li>패턴 분석: 출퇴근 시간대의 특정 교통수단(버스 vs 지하철) 이용 변화와 미세먼지 수준 간의 상관관계 분석.</li>
-            <li>모델링: ARIMA 모델과 선형 회귀 모델을 결합하여, 환경 변화에 따른 도시 만족도 지수의 예측 변화량을 산출했습니다.</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">4. 분석 결과 및 정책 제안</h4>
-          <p class="text-gray-700">
-            미세먼지가 '나쁨' 이상인 날, 버스 이용량이 지하철 이용량보다 상대적으로 크게 감소하는 패턴을 발견했습니다.
-            이는 지하철역 접근성이 낮은 지역 주민의 도시 생활 불편도가 높음을 시사합니다.
-            따라서 미세먼지 대응 시 지하철역 중심의 대책보다는, 버스 노선 주변의 대기질 개선(미세먼지 저감 시설 설치)에 집중할 것을 제안했습니다.
-          </p>
-        </div>
-
-        <div>
-          <h4 class="text-xl font-semibold mb-2 text-gray-800">5. 향후 프로젝트 방향 제언</h4>
-          <p class="text-gray-700">
-            교통 혼잡도 데이터와 환경 만족도 예측 모델을 결합하여,
-            '교통 체증 완화 정책'이 도시 환경 만족도에 미치는 파급 효과를 시뮬레이션하는 동적 예측 모델로 발전시키고자 합니다.
-          </p>
-        </div>
-      </div>
-    </article>
-  </div>
-</section>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenuItems = document.getElementById('mobile-menu-items');
+                const mobileProjectToggle = document.getElementById('mobile-project-toggle');
+                const mobileProjectDropdown = document.getElementById('mobile-project-dropdown');
+                const navLinks = document.querySelectorAll('.nav-link');
+                const currentPage = window.location.pathname.split('/').pop();
+    
+                // 1. 모바일 메뉴 토글
+                mobileMenuButton.addEventListener('click', () => {
+                    mobileMenuItems.style.display = mobileMenuItems.style.display === 'none' ? 'block' : 'none';
+                });
+    
+                // 2. 모바일 프로젝트 드롭다운 토글
+                mobileProjectToggle.addEventListener('click', () => {
+                    const isHidden = mobileProjectDropdown.classList.contains('hidden');
+                    mobileProjectDropdown.classList.toggle('hidden', !isHidden);
+                });
+    
+                // 3. 현재 페이지에 맞는 네비게이션 링크 활성화
+                navLinks.forEach(link => {
+                    const linkHref = link.getAttribute('href').split('#')[0]; // # 앵커 제거
+                    const targetId = link.getAttribute('data-target');
+    
+                    // 파일 이름이 일치하면 활성화
+                    if (linkHref === currentPage) {
+                        link.classList.add('active');
+                    } 
+                    
+                    // projects.html 파일 내에서 projects 링크 활성화
+                    else if (currentPage === 'projects.html' && targetId === 'projects') {
+                        link.classList.add('active');
+                    } 
+                    
+                    // project-link (하위 메뉴)가 아닌 경우에만, 파일 이름으로 비교
+                    else if (link.classList.contains('project-link')) {
+                        const mainTarget = link.getAttribute('data-main-target');
+                        if (currentPage === `${mainTarget}.html`) {
+                            // 프로젝트 페이지 내의 앵커는 별도의 처리가 필요하지만, 상위 메뉴 활성화는 projects.html에서 일괄 처리
+                        }
+                    }
+                });
+    
+                // 4. projects.html 페이지에서 앵커가 있을 경우 해당 앵커로 스크롤
+                if (currentPage === 'projects.html' && window.location.hash) {
+                    setTimeout(() => {
+                        const targetElement = document.querySelector(window.location.hash);
+                        if (targetElement) {
+                            const headerHeight = document.querySelector('header').offsetHeight;
+                            // 헤더 높이만큼 띄워서 스크롤
+                            window.scrollTo({
+                                top: targetElement.offsetTop - headerHeight - 20, // 20px 추가 여백
+                                behavior: 'smooth'
+                            });
+                        }
+                    }, 100); // DOM 렌더링 후 실행을 위해 딜레이 부여
+                }
+            });
+        </script>
+        </body>
+</html>

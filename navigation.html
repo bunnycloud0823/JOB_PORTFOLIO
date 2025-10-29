@@ -1,88 +1,157 @@
-<header class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md border-b border-gray-200">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-center items-center">
-    
-    <!-- PC 네비게이션 -->
-    <nav class="hidden md:flex space-x-10 text-sm font-medium">
-      <a href="#" data-page="whoami.html" class="nav-link hover:text-black transition duration-150 active">
-        WHO AM I
-      </a>
-      <a href="./selfintro.html" class="nav-link text-gray-700 hover:text-indigo-600 pb-1 transition-colors">
-        자소서
-        </a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포트폴리오 - 데이터 분석가</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 기본 폰트 설정 */
+        :root { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7; /* 아주 연한 회색 배경 */
+        }
+        /* 섹션 구분선 */
+        .section-divider {
+            height: 1px;
+            background-color: #e5e5e5;
+            margin: 4rem 0;
+        }
 
-      <!-- 프로젝트 드롭다운 -->
-      <div class="relative group">
-        <span class="nav-link cursor-pointer hover:text-black transition duration-150">
-          프로젝트 ▼
-        </span>
-        <div class="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-56 bg-white border border-gray-200 rounded-lg shadow-lg hidden group-hover:block">
-          <a href="#" data-page="projects.html" data-target="project1" class="block px-4 py-2 text-sm hover:bg-gray-50">프로젝트 1: 아동 행복</a>
-          <a href="#" data-page="projects.html" data-target="project2" class="block px-4 py-2 text-sm hover:bg-gray-50">프로젝트 2: 노인 고독사</a>
-          <a href="#" data-page="projects.html" data-target="project3" class="block px-4 py-2 text-sm hover:bg-gray-50">프로젝트 3: 공공 보건 캠페인</a>
-          <a href="#" data-page="projects.html" data-target="project4" class="block px-4 py-2 text-sm hover:bg-gray-50">프로젝트 4: 도시 환경 만족도</a>
+        /* 프로젝트 드롭다운 (PC: hover) */
+        .project-menu-container { position: relative; }
+        .project-dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 15rem;
+            z-index: 20;
+            background-color: white;
+            border: 1px solid #e5e5e5;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        @media (min-width: 768px) {
+            .project-menu-container:hover .project-dropdown { display: block; }
+        }
+        .project-dropdown a {
+            padding: 0.75rem 1rem;
+            display: block;
+            font-weight: 500;
+        }
+        .project-dropdown a:hover { background-color: #f0f0f0; }
+        
+        /* 활성 네비게이션 링크 스타일 (하늘색 밑줄) */
+        .nav-link.active {
+            border-bottom: 3px solid #3b82f6; /* blue-500 */
+            padding-bottom: 0.25rem;
+            font-weight: 700;
+        }
+        
+        /* 텍스트 가독성 및 레이아웃 */
+        .text-content-wrapper { line-height: 1.8; letter-spacing: -0.01em; word-break: keep-all; }
+        .gray-box { background-color: #ffffff; border: 1px solid #e5e5e5; }
+    </style>
+</head>
+<body class="text-gray-900">
+
+    <header class="sticky top-0 z-10 bg-white shadow-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-center items-center">
+            
+            <nav class="hidden md:flex space-x-10 text-sm font-medium">
+                <a href="whoami.html" data-target="whoami" class="nav-link hover:text-black transition duration-150">WHO AM I</a>
+                <a href="selfintro.html" data-target="coverletter" class="nav-link hover:text-black transition duration-150">자소서</a>
+
+                <div class="project-menu-container group">
+                    <a href="projects.html" data-target="projects" class="nav-link cursor-pointer hover:text-black transition duration-150">프로젝트 ▼</a>
+                    <div class="project-dropdown hidden md:group-hover:block transition duration-200 ease-in-out">
+                        <a href="projects.html#project1" data-target="project1" data-main-target="projects" class="project-link text-sm">프로젝트 1: 아동 행복</a>
+                        <a href="projects.html#project2" data-target="project2" data-main-target="projects" class="project-link text-sm">프로젝트 2: 노인 고독사</a>
+                        <a href="projects.html#project3" data-target="project3" data-main-target="projects" class="project-link text-sm">프로젝트 3: 공공 보건 캠페인</a>
+                        <a href="projects.html#project4" data-target="project4" data-main-target="projects" class="project-link text-sm">프로젝트 4: 도시 환경 만족도</a>
+                    </div>
+                </div>
+            </nav>
+
+            <button id="mobile-menu-button" class="md:hidden absolute right-4 p-2 rounded-md hover:bg-gray-100">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
         </div>
-      </div>
-    </nav>
 
-    <!-- 모바일 메뉴 버튼 -->
-    <button id="mobile-menu-button" class="md:hidden absolute right-4 p-2 rounded-md hover:bg-gray-100">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-        class="lucide lucide-menu">
-        <line x1="4" x2="20" y1="12" y2="12"/>
-        <line x1="4" x2="20" y1="6" y2="6"/>
-        <line x1="4" x2="20" y1="18" y2="18"/>
-      </svg>
-    </button>
-  </div>
+        <nav id="mobile-menu-items" class="md:hidden bg-white border-t border-gray-200" style="display: none;">
+            <a href="whoami.html" data-target="whoami" class="nav-link block px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50">WHO AM I</a>
+            <a href="selfintro.html" data-target="coverletter" class="nav-link block px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50">자소서</a>
+            
+            <div id="mobile-project-toggle" class="px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50 cursor-pointer flex justify-between items-center">
+                <span>프로젝트</span>
+                <span id="mobile-project-arrow" class="text-xs">▼</span>
+            </div>
+            <div id="mobile-project-dropdown" class="hidden bg-gray-50">
+                <a href="projects.html#project1" data-target="project1" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 1: 아동 행복</a>
+                <a href="projects.html#project2" data-target="project2" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 2: 노인 고독사</a>
+                <a href="projects.html#project3" data-target="projects.html#project3" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 3: 공공 보건 캠페인</a>
+                <a href="projects.html#project4" data-target="projects.html#project4" data-main-target="projects" class="project-link block pl-8 pr-4 py-2 text-sm text-gray-700 hover:bg-gray-100">프로젝트 4: 도시 환경 만족도</a>
+            </div>
+        </nav>
+    </header>
 
-  <!-- 모바일 네비게이션 -->
-  <nav id="mobile-menu-items" class="md:hidden bg-white border-t border-gray-200 hidden">
-    <a href="#" data-page="whoami.html" class="block px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50">
-      WHO AM I
-    </a>
-    <a href="#" data-page="coverletter.html" class="block px-4 py-3 text-sm font-medium border-b border-gray-100 hover:bg-gray-50">
-      자소서
-    </a>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenuItems = document.getElementById('mobile-menu-items');
+            const mobileProjectToggle = document.getElementById('mobile-project-toggle');
+            const mobileProjectDropdown = document.getElementById('mobile-project-dropdown');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const currentPage = window.location.pathname.split('/').pop();
 
-    <!-- 프로젝트 토글 -->
-    <div id="mobile-project-toggle" class="px-4 py-3 text-sm font-medium border-b border-gray-100 cursor-pointer flex justify-between items-center hover:bg-gray-50">
-      <span>프로젝트 ▼</span>
-    </div>
-    <div id="mobile-project-dropdown" class="hidden bg-gray-50">
-      <a href="#" data-page="projects.html" data-target="project1" class="block pl-8 pr-4 py-2 text-sm hover:bg-gray-100">프로젝트 1: 아동 행복</a>
-      <a href="#" data-page="projects.html" data-target="project2" class="block pl-8 pr-4 py-2 text-sm hover:bg-gray-100">프로젝트 2: 노인 고독사</a>
-      <a href="#" data-page="projects.html" data-target="project3" class="block pl-8 pr-4 py-2 text-sm hover:bg-gray-100">프로젝트 3: 공공 보건 캠페인</a>
-      <a href="#" data-page="projects.html" data-target="project4" class="block pl-8 pr-4 py-2 text-sm hover:bg-gray-100">프로젝트 4: 도시 환경 만족도</a>
-    </div>
-  </nav>
-</header>
+            // 1. 모바일 메뉴 토글
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenuItems.style.display = mobileMenuItems.style.display === 'none' ? 'block' : 'none';
+            });
 
-<script>
-  // 모바일 메뉴 열기/닫기
-  document.addEventListener('click', (e) => {
-    const mobileMenu = document.getElementById('mobile-menu-items');
-    const toggleButton = document.getElementById('mobile-menu-button');
-    const dropdownToggle = document.getElementById('mobile-project-toggle');
-    const dropdownMenu = document.getElementById('mobile-project-dropdown');
+            // 2. 모바일 프로젝트 드롭다운 토글
+            mobileProjectToggle.addEventListener('click', () => {
+                const isHidden = mobileProjectDropdown.classList.contains('hidden');
+                mobileProjectDropdown.classList.toggle('hidden', !isHidden);
+            });
 
-    if (toggleButton && toggleButton.contains(e.target)) {
-      e.preventDefault();
-      mobileMenu.classList.toggle('hidden');
-    } else if (dropdownToggle && dropdownToggle.contains(e.target)) {
-      dropdownMenu.classList.toggle('hidden');
-    }
-  });
+            // 3. 현재 페이지에 맞는 네비게이션 링크 활성화
+            navLinks.forEach(link => {
+                const linkHref = link.getAttribute('href').split('#')[0]; // # 앵커 제거
+                const targetId = link.getAttribute('data-target');
 
-  // 페이지 이동 로직 (index.html의 loadPage 함수와 연동됨)
-  document.querySelectorAll('[data-page]').forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      const page = link.getAttribute('data-page');
-      const section = link.getAttribute('data-target');
-      if (typeof loadPage === 'function') {
-        loadPage(page, section);
-      }
-    });
-  });
-</script>
+                // 파일 이름이 일치하면 활성화
+                if (linkHref === currentPage) {
+                    link.classList.add('active');
+                } 
+                
+                // projects.html 파일 내에서 projects 링크 활성화
+                else if (currentPage === 'projects.html' && targetId === 'projects') {
+                    link.classList.add('active');
+                } 
+                
+                // project-link (하위 메뉴)가 아닌 경우에만, 파일 이름으로 비교
+                else if (link.classList.contains('project-link')) {
+                    const mainTarget = link.getAttribute('data-main-target');
+                    if (currentPage === `${mainTarget}.html`) {
+                        // 프로젝트 페이지 내의 앵커는 별도의 처리가 필요하지만, 상위 메뉴 활성화는 projects.html에서 일괄 처리
+                    }
+                }
+            });
+
+            // 4. projects.html 페이지에서 앵커가 있을 경우 해당 앵커로 스크롤
+            if (currentPage === 'projects.html' && window.location.hash) {
+                setTimeout(() => {
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement) {
+                        const headerHeight = document.querySelector('header').offsetHeight;
+                        // 헤더 높이만큼 띄워서 스크롤
+                        window.scrollTo({
+                            top: targetElement.offsetTop - headerHeight - 20, // 20px 추가 여백
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 100); // DOM 렌더링 후 실행을 위해 딜레이 부여
+            }
+        });
+    </script>
