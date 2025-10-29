@@ -18,7 +18,7 @@
                 background-color: #e5e5e5;
                 margin: 4rem 0;
             }
-    
+        
             /* 프로젝트 드롭다운 (PC: hover) */
             .project-menu-container { position: relative; }
             .project-dropdown {
@@ -43,7 +43,7 @@
             }
             .project-dropdown a:hover { background-color: #f0f0f0; }
             
-            /* 활성 네비게이션 링크 스타일 (하늘색 밑줄) */
+            /* 네비게이션 해당 페이지 밑줄 */
             .nav-link.active {
                 border-bottom: 3px solid #3b82f6; /* blue-500 */
                 padding-bottom: 0.25rem;
@@ -53,6 +53,11 @@
             /* 텍스트 가독성 및 레이아웃 */
             .text-content-wrapper { line-height: 1.8; letter-spacing: -0.01em; word-break: keep-all; }
             .gray-box { background-color: #ffffff; border: 1px solid #e5e5e5; }
+
+            /* 프로젝트 제목이 고정 헤더에 가려지는 것을 막는 CSS (projects.html에서 사용) */
+            #project1, #project2, #project3, #project4 {
+                scroll-margin-top: 80px; 
+            }
         </style>
     </head>
     <body class="text-gray-900">
@@ -195,19 +200,10 @@
                                 <li>공공근로사업 / 경제체육과 지역경제팀 부서 내 공무원 업무 보조</li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
             </section>
         </main>
-
-        <footer class="bg-gray-900 text-white py-8 mt-12">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 Data Analyst Portfolio. All rights reserved.</p>
-                <p class="mt-2">Designed with Black & White Simplicity and Full Responsiveness.</p>
-            </div>
-        </footer>
-
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -216,23 +212,23 @@
                 const mobileProjectDropdown = document.getElementById('mobile-project-dropdown');
                 const navLinks = document.querySelectorAll('.nav-link');
                 const currentPage = window.location.pathname.split('/').pop();
-    
+        
                 // 1. 모바일 메뉴 토글
                 mobileMenuButton.addEventListener('click', () => {
                     mobileMenuItems.style.display = mobileMenuItems.style.display === 'none' ? 'block' : 'none';
                 });
-    
+        
                 // 2. 모바일 프로젝트 드롭다운 토글
                 mobileProjectToggle.addEventListener('click', () => {
                     const isHidden = mobileProjectDropdown.classList.contains('hidden');
                     mobileProjectDropdown.classList.toggle('hidden', !isHidden);
                 });
-    
+        
                 // 3. 현재 페이지에 맞는 네비게이션 링크 활성화
                 navLinks.forEach(link => {
                     const linkHref = link.getAttribute('href').split('#')[0]; // # 앵커 제거
                     const targetId = link.getAttribute('data-target');
-    
+        
                     // 파일 이름이 일치하면 활성화
                     if (linkHref === currentPage) {
                         link.classList.add('active');
@@ -251,20 +247,20 @@
                         }
                     }
                 });
-    
+        
                 // 4. projects.html 페이지에서 앵커가 있을 경우 해당 앵커로 스크롤
                 if (currentPage === 'projects.html' && window.location.hash) {
-                    setTimeout(() => {
-                        const targetElement = document.querySelector(window.location.hash);
-                        if (targetElement) {
-                            const headerHeight = document.querySelector('header').offsetHeight;
-                            // 헤더 높이만큼 띄워서 스크롤
-                            window.scrollTo({
-                                top: targetElement.offsetTop - headerHeight - 20, // 20px 추가 여백
-                                behavior: 'smooth'
-                            });
-                        }
-                    }, 100); // DOM 렌더링 후 실행을 위해 딜레이 부여
+                    /* scroll-margin-top CSS 속성으로 대체되어 주석 처리됨 */
+                    // setTimeout(() => {
+                    //     const targetElement = document.querySelector(window.location.hash);
+                    //     if (targetElement) {
+                    //         const headerHeight = document.querySelector('header').offsetHeight;
+                    //         window.scrollTo({
+                    //             top: targetElement.offsetTop - headerHeight - 20, 
+                    //             behavior: 'smooth'
+                    //         });
+                    //     }
+                    // }, 100); 
                 }
             });
         </script>
