@@ -18,7 +18,7 @@
                 background-color: #e5e5e5;
                 margin: 4rem 0;
             }
-    
+        
             /* 프로젝트 드롭다운 (PC: hover) */
             .project-menu-container { position: relative; }
             .project-dropdown {
@@ -53,6 +53,15 @@
             /* 텍스트 가독성 및 레이아웃 */
             .text-content-wrapper { line-height: 1.8; letter-spacing: -0.01em; word-break: keep-all; }
             .gray-box { background-color: #ffffff; border: 1px solid #e5e5e5; }
+
+            /* ========================================================= */
+            /* [수정 부분 1] 고정된 헤더로 인해 제목이 가려지는 현상 해결 */
+            /* ========================================================= */
+            /* 프로젝트 앵커(#project1, #project2 등) 도착 시, 스크롤 멈춤 위치를 헤더 높이만큼 내립니다. */
+            /* 현재 헤더 높이를 고려하여 80px로 설정했습니다. 필요하면 이 값을 조정하세요. */
+            #project1, #project2, #project3, #project4 {
+                scroll-margin-top: 80px; 
+            }
         </style>
     </head>
     <body class="text-gray-900">
@@ -243,23 +252,23 @@
                 const mobileProjectDropdown = document.getElementById('mobile-project-dropdown');
                 const navLinks = document.querySelectorAll('.nav-link');
                 const currentPage = window.location.pathname.split('/').pop();
-    
+        
                 // 1. 모바일 메뉴 토글
                 mobileMenuButton.addEventListener('click', () => {
                     mobileMenuItems.style.display = mobileMenuItems.style.display === 'none' ? 'block' : 'none';
                 });
-    
+        
                 // 2. 모바일 프로젝트 드롭다운 토글
                 mobileProjectToggle.addEventListener('click', () => {
                     const isHidden = mobileProjectDropdown.classList.contains('hidden');
                     mobileProjectDropdown.classList.toggle('hidden', !isHidden);
                 });
-    
+        
                 // 3. 현재 페이지에 맞는 네비게이션 링크 활성화
                 navLinks.forEach(link => {
                     const linkHref = link.getAttribute('href').split('#')[0]; // # 앵커 제거
                     const targetId = link.getAttribute('data-target');
-    
+        
                     // 파일 이름이 일치하면 활성화
                     if (linkHref === currentPage) {
                         link.classList.add('active');
@@ -278,20 +287,28 @@
                         }
                     }
                 });
-    
+        
                 // 4. projects.html 페이지에서 앵커가 있을 경우 해당 앵커로 스크롤
                 if (currentPage === 'projects.html' && window.location.hash) {
-                    setTimeout(() => {
-                        const targetElement = document.querySelector(window.location.hash);
-                        if (targetElement) {
-                            const headerHeight = document.querySelector('header').offsetHeight;
-                            // 헤더 높이만큼 띄워서 스크롤
-                            window.scrollTo({
-                                top: targetElement.offsetTop - headerHeight - 20, // 20px 추가 여백
-                                behavior: 'smooth'
-                            });
-                        }
-                    }, 100); // DOM 렌더링 후 실행을 위해 딜레이 부여
+                    
+                    /* ========================================================= */
+                    /* [수정 부분 2] 수동 스크롤 조작 로직 주석 처리 */
+                    /* ========================================================= */
+                    /* 스크롤 위치 조정은 CSS의 'scroll-margin-top' 속성으로 처리되었으므로, 
+                       JavaScript를 이용한 수동 스크롤 조작 코드는 주석 처리하거나 제거합니다.
+                       이 코드가 없어도 CSS가 자동으로 헤더 높이를 반영해 줍니다.
+                    */
+                    // setTimeout(() => {
+                    //     const targetElement = document.querySelector(window.location.hash);
+                    //     if (targetElement) {
+                    //         const headerHeight = document.querySelector('header').offsetHeight;
+                    //         // 헤더 높이만큼 띄워서 스크롤
+                    //         window.scrollTo({
+                    //             top: targetElement.offsetTop - headerHeight - 20, // 20px 추가 여백
+                    //             behavior: 'smooth'
+                    //         });
+                    //     }
+                    // }, 100); // DOM 렌더링 후 실행을 위해 딜레이 부여
                 }
             });
         </script>
