@@ -4,9 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>포트폴리오 - 데이터 분석가</title>
-    <meta http-equiv="refresh" content="0; url=whoami.html">
+    <meta http-equiv="refresh" content="2; url=whoami.html"> <!-- 2초 후 이동 -->
+
+    <!-- 구글 폰트: Cafe24 Ssurround (부드러운 느낌 유지) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cafe24+Ssurround&display=swap" rel="stylesheet">
+    <style>
+        /* 애니메이션과 배경 데코레이션을 제거하고 색상을 톤 다운하여 차분하게 변경 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #e9e9e9; 
+            font-family: 'Cafe24 Ssurround', sans-serif;
+            color: #795548; /* 부드러운 갈색 계열 글자색으로 변경 */
+            overflow: hidden;
+        }
+        
+        p {
+            font-size: 20px; /* 글씨 크기 작게 요청 반영 (30px -> 20px) */
+            padding: 18px 30px; /* 패딩 조정 */
+            background-color: #ffffff; /* 깨끗한 흰색 배경 */
+            border: 1px solid #a2c0f8; /* 얇고 따뜻한 테두리 */
+            border-radius: 15px; /* 둥근 모서리 정도를 줄여서 과하지 않게 */
+            text-align: center;
+            font-weight: normal;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+            /* pulseEffect 애니메이션 제거 */
+            line-height: 1.4;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease; /* 호버 효과를 위해 transition 추가 */
+        }
+        
+        /* 마우스 오버 시 살짝 떠오르는 효과로 미묘한 귀여움 추가 */
+        p:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* 배경 데코레이션 및 애니메이션 모두 제거 */
+    </style>
 </head>
 <body>
-    <p>강혜교의 포트폴리오 페이지로 이동합니다.... <a href="whoami.html">WHO AM I 페이지로 이동</a></p>
+    <p>
+        강혜교의 포트폴리오로<br>
+        잠시 후 이동합니다... 🐳
+    </p>
 </body>
 </html>
